@@ -1,0 +1,7 @@
+INDEX VERSION 1.134+C:\Users\enrsoralf\Desktop\AD\.metadata\.plugins\org.eclipse.jdt.core
+822146917.index
+655803882.index
+3413079893.index
+1865797976.index
+1090114417.index
+3362368894.index

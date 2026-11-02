@@ -1,0 +1,10 @@
+package Ejemplo1JDBC;
+
+public class Conectar_BD {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

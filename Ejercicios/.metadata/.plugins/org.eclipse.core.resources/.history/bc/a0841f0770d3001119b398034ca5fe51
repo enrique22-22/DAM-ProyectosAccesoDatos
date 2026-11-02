@@ -1,0 +1,52 @@
+package PracticaMongoDByJSON;
+
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import com.google.gson.Gson;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+
+public class Socio_MongoDBFrom {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		MongoCursor <Document> cursor_socios = null;
+		Bson bsonFilter = null;
+		Document doc_socios = null;
+		String socio = null;
+		
+		MongoClient mongoCliente = MongoClients.create();
+		
+		MongoDatabase baseDatos = mongoCliente.getDatabase("Biblioteca");
+		MongoCollection col_socios = baseDatos.getCollection("Socios"); 
+		
+		try {
+			
+			bsonFilter = Filters.eq("Num_socio", 1);
+			doc_socios = (Document) col_socios.find(bsonFilter).first();
+
+			socio = doc_socios.toJson();
+			
+			System.out.println("Cadena JSON Socio que es un String --> " +socio);
+			
+			Gson gson = new Gson();
+			
+			Socio objSocio = gson.fromJson(socio, Socio.class);
+			System.out.println("Socio nombre --> " +objSocio.getNombre());
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+
+}

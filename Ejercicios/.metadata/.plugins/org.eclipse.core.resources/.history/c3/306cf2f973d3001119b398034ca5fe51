@@ -1,0 +1,21 @@
+package Ejemplo1JDBC;
+
+import com.mongodb.internal.connection.Connection;
+
+public class Conectar_BD {
+	
+	static String DRIVER = "com.mysql.jdbc.Driver";
+	static String URL = "jdbc:mysql://localhost:3306/diinventarioexamen";
+	static String USR = "root";
+	static String PWD = "mysql";
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		System.out.println("Registrado");
+		
+	}
+
+}

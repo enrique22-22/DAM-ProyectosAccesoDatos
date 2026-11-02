@@ -1,0 +1,54 @@
+package ejemplos_test;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+import java.io.*;
+
+public class ejem1_test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		// Aquí creo el objeto JSONParser para poder parsear el archivo JSON y guardarlo en memoria.
+		JSONParser parser = new JSONParser();
+		
+		JSONArray msgs; // Aquí declaro un JSONArray.
+		
+		
+		// Aquí guardo todo en un try para controlar las excepciones
+		try {
+			
+			System.out.println("------------- Ejemplo de sacar la edad ----------------");
+			
+			// Aquí guardo dentro de la variable obj el archivo JSON test.json de memoria
+			JSONObject obj = (JSONObject) parser.parse(new FileReader ("ficheros/test.json"));
+			
+			// Aquí lo que hago es acceder al campo del JSON, igual que en MongoDB, y lo guardo en una variable del mismo tipo, y lo casteo porque viene de Object.
+			String v_name = (String) obj.get("name");
+			Long v_age = (Long) obj.get("age");
+			
+			System.out.println(v_name + " --> " + v_age);
+			
+			System.out.println();
+			System.out.println("------------- Ejemplo de sacar la información de los mensajes ----------------");
+			
+			// Aquí guardo el parámetro messages del JSON y lo casteo porque la variable tiene que recibir un JSONArray.
+			msgs = (JSONArray) obj.get("messages");
+			
+			// Aquí creo un ForEach para recorrer todos los mensajes del JSON.
+			for (Object msinfo: msgs) {
+				System.out.println("Mensaje --> " +msinfo.toString());
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+}

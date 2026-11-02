@@ -1,0 +1,16 @@
+package Ejemplo1JDBC;
+
+public class Conectar_BD {
+	
+	static String DRIVER = "com.mysql.jdbc.Driver";
+	static String URL = "jdbc:mysql://localhost:3306/diinventarioexamen";
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		
+	}
+
+}
