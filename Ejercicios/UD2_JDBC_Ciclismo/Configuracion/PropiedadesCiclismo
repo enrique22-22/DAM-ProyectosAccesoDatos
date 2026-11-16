@@ -1,4 +1,4 @@
 driverClassName=com.mysql.cj.jdbc.Driver
 url=jdbc:mysql://localhost:3306/ciclismo
 username=root
-password=mysql
+password=Informatica1

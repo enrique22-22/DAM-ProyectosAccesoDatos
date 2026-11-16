@@ -131,6 +131,60 @@ public class Biblioteca_insert_update {
 			}
 			
 			System.out.println();
+			System.out.println("----------------- Ejercicio 1. Buscar el registro del primer libro (clase) -----------------------");
+			
+			cursor_libros = col_libros.find().iterator();
+			
+			libro = (Document) col_libros.find().first();
+			
+			System.out.println("El registro del primer libro es: " +libro.toJson());
+			
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 2. Buscar todos los libros (clase)-----------------------");
+			
+			cursor_libros = col_libros.find().iterator();
+			
+			while(cursor_libros.hasNext()) {
+				System.out.println(cursor_libros.next().toJson());
+			}
+			
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 3. Obtener la lista de socios (clase) -----------------------");
+			
+			cursor_socios = col_socios.find().iterator();
+			
+			while(cursor_socios.hasNext()) {
+				System.out.println(cursor_socios.next().toJson());
+			}
+			
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 4. Obtener el nombre de los socios (usar método get()) (clase) -----------------------");
+			
+			cursor_socios = col_socios.find().iterator();
+			
+			while(cursor_socios.hasNext()) {
+				System.out.println(cursor_socios.next().get("Nombre"));
+			}
+			
+			
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 5. Buscar el libro con titulo \"El Quijote\" (clase) -----------------------");
+			
+			bsonFilter = Filters.eq("titulo" , "El Quijote");
+			
+			cursor_libros = col_libros.find(bsonFilter).iterator();
+			
+			while (cursor_libros.hasNext()) {
+				System.out.println("El libro es: " + cursor_libros.next().toJson());
+			}
+			
+			
+			
+			System.out.println();
 			System.out.println("----------------- Ejercicio 6. Buscar el préstamo con dos libros -----------------------");
 			
 			bsonFilter = Filters.size("libro", 2); // Este filtro busca el parámetro que se llame "libro" dentro de la colección y que tenga 2 posiciones.
@@ -250,6 +304,46 @@ public class Biblioteca_insert_update {
 			}
 			
 			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 13. Mostrar el nombre del socio 2 -----------------------");
+			bsonFilter = Filters.eq("Num_socio", 2);
+			cursor_socios = col_socios.find(bsonFilter).iterator();
+			
+			if (cursor_socios.hasNext()) {
+			    System.out.println("El nombre del socio 2 es: " + cursor_socios.next().get("Nombre"));
+			}
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 14. Libros (título, nombre autor) de autor americano O editorial Planeta -----------------------");
+			bsonFilter = Filters.or(Filters.eq("autor.nacionalidad", "Americana"),Filters.eq("editorial", "Planeta"));
+			
+			cursor_libros = col_libros.find(bsonFilter).projection(Projections.fields(Projections.include("titulo", "autor.nombre"), Projections.excludeId())).iterator();
+			
+			while (cursor_libros.hasNext()) {
+			    System.out.println(cursor_libros.next().toString());
+			}
+			
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 15. Mostrar la fecha de préstamo del libro prestado al socio num_socio 1 -----------------------");
+			bsonFilter = Filters.eq("socio.num_socio", "1");
+			cursor_prestamos = col_prestamos.find(bsonFilter).iterator();
+			
+			while (cursor_prestamos.hasNext()) {
+			    Document prestamo = cursor_prestamos.next();
+			    System.out.println("Fecha préstamo socio 1: " + prestamo.get("fecha_pres"));
+			}
+			
+			
+			System.out.println();
+			System.out.println("----------------- Ejercicio 16. Buscar libros editados entre 1990 y 2000 -----------------------");
+			bsonFilter = Filters.and(Filters.gte("año_publicacion", 1990),Filters.lte("año_publicacion", 2000));
+			
+			cursor_libros = col_libros.find(bsonFilter).iterator();
+			
+			while (cursor_libros.hasNext()) {
+			    System.out.println("Libro 1990-2000: " + cursor_libros.next().get("titulo"));
+			}
 			
 			System.out.println();
 			System.out.println("----------------- Ejercicio 17. Mostrar el título de los libros escritos por isaac Asimov -----------------------");

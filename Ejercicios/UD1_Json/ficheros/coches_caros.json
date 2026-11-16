@@ -1,0 +1,70 @@
+[
+  {
+    "Model": "Rolls",
+    "Year": 1960,
+    "id_car": 108,
+    "Value": 22000,
+    "Matrícula": "232323G",
+    "revisiones": [
+      {
+        "fecha": "2024-09-14",
+        "tipo": "Restauración de carrocería"
+      },
+      {
+        "fecha": "2025-07-01",
+        "tipo": "ITV"
+      }
+    ]
+  },
+  {
+    "Model": "Rolls",
+    "Year": 1950,
+    "id_car": 107,
+    "Value": 15000,
+    "Matrícula": "345677C",
+    "revisiones": [
+      {
+        "fecha": "2024-04-12",
+        "tipo": "Restauración interior"
+      },
+      {
+        "fecha": "2025-03-08",
+        "tipo": "ITV"
+      }
+    ]
+  },
+  {
+    "Model": "Citroen",
+    "Year": 2015,
+    "id_car": 101,
+    "Value": 25000,
+    "Matrícula": "12333A",
+    "revisiones": [
+      {
+        "fecha": "2024-03-15",
+        "tipo": "Cambio de aceite"
+      },
+      {
+        "fecha": "2025-01-10",
+        "tipo": "ITV"
+      }
+    ]
+  },
+  {
+    "Model": "Ford",
+    "Year": 2000,
+    "id_car": 104,
+    "Value": 20000,
+    "Matrícula": "123455V",
+    "revisiones": [
+      {
+        "fecha": "2024-08-22",
+        "tipo": "Cambio de aceite"
+      },
+      {
+        "fecha": "2025-06-03",
+        "tipo": "Revisión general"
+      }
+    ]
+  }
+]

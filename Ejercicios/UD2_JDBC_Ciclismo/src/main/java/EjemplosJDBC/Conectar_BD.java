@@ -8,9 +8,9 @@ import java.sql.SQLException;
 public class Conectar_BD {
 	
 	static String DRIVER = "com.mysql.jdbc.Driver";
-	static String URL = "jdbc:mysql://localhost:3306/diinventarioexamen";
+	static String URL = "jdbc:mysql://localhost:3306/ciclismo";
 	static String USR = "root";
-	static String PWD = "mysql";
+	static String PWD = "Informatica1";
 	
 
 	public static void main(String[] args) {

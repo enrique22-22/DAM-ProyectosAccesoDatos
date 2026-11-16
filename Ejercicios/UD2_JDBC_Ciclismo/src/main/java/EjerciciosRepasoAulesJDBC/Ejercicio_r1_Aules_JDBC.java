@@ -1,10 +1,11 @@
-package EjerciciosAules;
+package EjerciciosRepasoAulesJDBC;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Scanner;
@@ -13,55 +14,47 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSourceFactory;
 
-public class Ejercicio1_JDBC_Aules {
+public class Ejercicio_r1_Aules_JDBC {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+
+		// Variables para conectar a la BD
 		Connection con = null;
 		PreparedStatement stmt = null;
 		Integer result;
 		String sql;
-		Integer vpremio;
-		String vcolor, vtipo, vcodigo;
-		
-		
+		ResultSet rs = null;
+		// -------------------------------
+
+		Scanner sc = new Scanner(System.in);
+		Integer vedad;
+
 		try {
-			
+			// Conexión a la BD
 			Properties propiedades = new Properties();
 			propiedades.load(new FileInputStream("Configuracion\\PropiedadesCiclismo"));
-			
+
 			DataSource ds = BasicDataSourceFactory.createDataSource(propiedades);
 			con = ds.getConnection();
 			System.out.println("Conectado");
-			
-			Scanner sc = new Scanner(System.in);
-			
-			System.out.print("Introduce el Código--> ");
-			vcodigo = sc.next();
-			
-			System.out.print("Introduce el Tipo --> ");
-			vtipo = sc.next();
-			
-			System.out.print("Introduce el Color --> ");
-			vcolor = sc.next();
-			
-			System.out.print("Introduce el Premio --> ");
-			vpremio = sc.nextInt();
-			
-			
-			sql = "INSERT INTO maillot VALUES (?,?,?,?)";
-			
-			stmt = con.prepareStatement(sql);
-			
-			stmt.setObject(1, vcodigo);
-			stmt.setString(2, vtipo);
-			stmt.setString(3, vcolor);
-			stmt.setInt(4, vpremio);
-			
-			stmt.executeUpdate();
-			
-			
+			// -------------------------------------------------------------------------
+
+			System.out.print("Introduce la edad --> ");
+			vedad = sc.nextInt();
+			sc.nextLine();
+
+			// Nota: si tu tabla usa 'edadc' en vez de 'nacimiento', cambia el WHERE por: WHERE edadc > ?
+			sql = "SELECT DISTINCT nombre FROM ciclista NATURAL JOIN etapa "
+				+ "WHERE year(curdate()) - year(nacimiento) > ?";
+
+			stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmt.setInt(1, vedad);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -70,18 +63,15 @@ public class Ejercicio1_JDBC_Aules {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
-				
 				if (con != null && !con.isClosed()) {
 					con.close();
 				}
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 
 }
